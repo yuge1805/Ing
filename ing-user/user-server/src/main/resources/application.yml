@@ -6,6 +6,11 @@ spring:
       discovery:
         server-addr: ${NACOS_DISCOVERY_ADDR:127.0.0.1:8848}
       config:
+        # 默认使用的是 Nacos 上 Public 这个namespace；
+        # 值是 namespace 对应的 id，id 值可以在 Nacos 的控制台获取
+        namespace:
+        # 默认使用的是 DEFAULT_GROUP
+        group:
         server-addr: ${NACOS_DISCOVERY_ADDR:127.0.0.1:8848}
   datasource:
     druid:
@@ -22,6 +27,19 @@ server:
   port: 18080
   servlet:
     context-path: /user
+management:
+  server:
+    # Actuator Web 访问端口
+    port: 18081
+  endpoints:
+    jmx:
+      exposure:
+        include: "*"
+    web:
+      exposure:
+        include: "*"
+    health:
+      show-detail: always
 logging:
   level:
     org.springframework.security: debug
