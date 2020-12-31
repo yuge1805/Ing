@@ -17,10 +17,13 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <spring-boot.version>2.3.7.RELEASE</spring-boot.version>
         <spring-cloud-alibaba.version>2.2.2.RELEASE</spring-cloud-alibaba.version>
+        <mybatis.plus.verion>3.4.1</mybatis.plus.verion>
     </properties>
 
     <modules>
         <module>ing-user</module>
+        <module>ing-commons</module>
+        <module>ing-generation</module>
     </modules>
 
     <dependencyManagement>
