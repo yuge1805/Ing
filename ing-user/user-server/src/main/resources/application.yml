@@ -12,11 +12,21 @@ spring:
         # 默认使用的是 DEFAULT_GROUP
         group:
         server-addr: ${NACOS_DISCOVERY_ADDR:127.0.0.1:8848}
+    sentinel:
+      # 取消Sentinel控制台懒加载
+      # 默认情况下 Sentinel 会在客户端首次调用的时候进行初始化，开始向控制台发送心跳包
+      # 配置 sentinel.eager=true 时，取消Sentinel控制台懒加载功能
+      eager: true
+      transport:
+        # 配置sentinel dashboard web地址
+        dashboard: 127.0.0.1:8080
+        # 微服务与sentinel dashboard进行HTTP Server交互的端口； dashboard监听该接口
+        port: 8719
   datasource:
     druid:
       url: jdbc:mysql://${MYSQL_HOST:127.0.0.1}:${MYSQL_PORT:3306}/ing_user?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false&serverTimezone=GMT%2B8
       username: root
-      password: root
+      password: 123.com
   redis:
     database: 1
     host: ${REDIS_HOST:127.0.0.1}
@@ -30,7 +40,7 @@ server:
 management:
   server:
     # Actuator Web 访问端口
-    port: 18081
+    port: 28080
   endpoints:
     jmx:
       exposure:
