@@ -17,4 +17,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class OrderItemServiceImpl extends ServiceImpl<OrderItemMapper, OrderItemEntity> implements OrderItemService {
 
+    @Override
+    public void addItem(OrderItemEntity orderItemEntity) {
+        this.save(orderItemEntity);
+        int i = 1 / 0;
+    }
+
 }

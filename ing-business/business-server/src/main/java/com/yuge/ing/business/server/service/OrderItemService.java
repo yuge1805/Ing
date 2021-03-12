@@ -13,4 +13,11 @@ import com.yuge.cloud.mybatis.core.service.IService;
  */
 public interface OrderItemService extends IService<OrderItemEntity> {
 
+    /**
+     * 新增
+     *
+     * @param orderItemEntity
+     */
+    void addItem(OrderItemEntity orderItemEntity);
+
 }
