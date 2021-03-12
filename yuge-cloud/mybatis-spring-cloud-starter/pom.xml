@@ -8,39 +8,41 @@
         <version>0.0.1-SNAPSHOT</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.yuge.ing</groupId>
-    <artifactId>business-server</artifactId>
+    <groupId>com.yuge.cloud</groupId>
+    <artifactId>mybatis-spring-cloud-starter</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>business-server</name>
-    <description>Business Server</description>
+    <name>mybatis-spring-cloud-starter</name>
+    <description>Mybatis Spring Cloud Starter</description>
     <properties>
         <java.version>1.8</java.version>
-        <web-spring-cloud-starter.version>0.0.1-SNAPSHOT</web-spring-cloud-starter.version>
-        <mybatis-spring-cloud-starter.version>0.0.1-SNAPSHOT</mybatis-spring-cloud-starter.version>
     </properties>
     <dependencies>
+        <!-- mybatis -->
         <dependency>
-            <groupId>com.yuge.cloud</groupId>
-            <artifactId>web-spring-cloud-starter</artifactId>
-            <version>${web-spring-cloud-starter.version}</version>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+        </dependency>
+        <!-- mysql -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+        <!-- 分页插件 -->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+        </dependency>
+        <!-- druid -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+        </dependency>
+        <!-- mybatis-plus -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>com.yuge.cloud</groupId>
-            <artifactId>mybatis-spring-cloud-starter</artifactId>
-            <version>${mybatis-spring-cloud-starter.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
     </dependencies>
 
     <build>

@@ -6,18 +6,21 @@ import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 
 public class CodeGenerationUtil {
 
+    //得到当前项目的路径
+    public static String oPath = "D:\\Program Files\\Workspace\\My-workspace\\Ing\\ggg";
+
     public static void main(String[] args) {
         DataSourceInfo info = new DataSourceInfo(
-                "jdbc:mysql://127.0.0.1:3306/ing_user?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false&serverTimezone=GMT%2B8",
+                "jdbc:mysql://127.0.0.1:3306/ing_business?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false&serverTimezone=GMT%2B8",
                 "root",
-                "root");
+                "123.com");
         CodeGenerationUtil.generationFull(
-                "com.yuge.ing.user",
+                "com.yuge.ing.business",
                 info,
                 true,
                 true,
-                "base_",
-                "base_user");
+                "biz_",
+                "biz_order", "biz_order_item");
     }
 
     /**
@@ -42,10 +45,10 @@ public class CodeGenerationUtil {
         autoGenerator.setDataSource(dsc);
         // 策略配置
         StrategyConfig strategy = strategyConfig(prefix, tableNames);
-//        strategy.setSuperMapperClass("com.yxtdh.vehicle.cloud.mybatis.starter.BaseMapper");
-//        strategy.setSuperControllerClass("com.yxtdh.cloud.starter.vehicle.BaseController");
-//        strategy.setSuperServiceClass("com.yxtdh.vehicle.cloud.mybatis.starter.IService");
-//        strategy.setSuperServiceImplClass("com.yxtdh.vehicle.cloud.mybatis.starter.ServiceImpl");
+        strategy.setSuperMapperClass("com.yuge.cloud.mybatis.core.mapper.BaseMapper");
+        strategy.setSuperControllerClass("com.yuge.cloud.web.core.controller.BaseController");
+        strategy.setSuperServiceClass("com.yuge.cloud.mybatis.core.service.IService");
+        strategy.setSuperServiceImplClass("com.yuge.cloud.mybatis.core.service.impl.ServiceImpl");
         autoGenerator.setStrategy(strategy);
         // 包配置
         PackageConfig pc = packageConfig(rootPackage);
@@ -203,13 +206,11 @@ public class CodeGenerationUtil {
     }
 
     public static String getOutputDir(String model) {
-        String oPath = System.getProperty("user.dir");//得到当前项目的路径
         String nPath = splitPath(oPath, model);
         return oPath + "\\" + nPath + "/src/main/java";
     }
 
     public static String getXmlOutputDir(String model) {
-        String oPath = System.getProperty("user.dir");//得到当前项目的路径
         String nPath = splitPath(oPath, model);
         return oPath + "\\" + nPath + "/src/main/resources";
     }
