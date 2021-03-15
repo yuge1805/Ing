@@ -1,4 +1,4 @@
-package com.yuge.ing.business.server;
+package com.yuge.ing.business;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;

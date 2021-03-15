@@ -1,7 +1,10 @@
 package com.yuge.ing.business.server.service;
 
+import com.yuge.ing.business.server.po.OrderEntity;
 import com.yuge.ing.business.server.po.OrderItemEntity;
 import com.yuge.cloud.mybatis.core.service.IService;
+
+import java.util.List;
 
 /**
  * <p>
@@ -20,4 +23,18 @@ public interface OrderItemService extends IService<OrderItemEntity> {
      */
     void addItem(OrderItemEntity orderItemEntity);
 
+    /**
+     * 删除
+     *
+     * @param orderNo
+     */
+    void deleteByOrderNo(String orderNo);
+
+    /**
+     * 根据订单号查询
+     *
+     * @param orderNo
+     * @return
+     */
+    List<OrderItemEntity> queryByOrderNo(String orderNo);
 }
