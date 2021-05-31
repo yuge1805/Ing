@@ -1,12 +1,15 @@
 package com.yuge.ing.business.server.controller;
 
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import com.yuge.ing.business.common.param.OrderParam;
+import com.yuge.ing.business.server.po.OrderEntity;
+import com.yuge.ing.business.server.service.OrderService;
+import com.yuge.ing.commons.result.CommonResponse;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 import org.springframework.stereotype.Controller;
 import com.yuge.cloud.web.core.controller.BaseController;
-import org.springframework.web.bind.annotation.RestController;
 
 /**
  * <p>
@@ -20,9 +23,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/order")
 public class OrderController extends BaseController {
 
+    @Autowired
+    private OrderService orderService;
+
     @GetMapping
     public String test() {
         return "test";
+    }
+
+    @PostMapping("/")
+    public CommonResponse add(@RequestBody OrderParam orderParam) {
+        orderService.addOrder(orderParam);
+        return CommonResponse.success(true);
     }
 
 }

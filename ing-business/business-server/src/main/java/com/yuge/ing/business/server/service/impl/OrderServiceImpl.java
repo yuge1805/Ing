@@ -1,16 +1,22 @@
 package com.yuge.ing.business.server.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.yuge.ing.business.common.param.OrderParam;
 import com.yuge.ing.business.server.po.OrderEntity;
 import com.yuge.ing.business.server.mapper.OrderMapper;
 import com.yuge.ing.business.server.po.OrderItemEntity;
 import com.yuge.ing.business.server.service.OrderItemService;
 import com.yuge.ing.business.server.service.OrderService;
 import com.yuge.cloud.mybatis.core.service.impl.ServiceImpl;
+import com.yuge.ing.user.api.UserRecordClient;
+import com.yuge.ing.user.common.param.UserRecordParam;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 /**
@@ -27,8 +33,25 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, OrderEntity> impl
     @Autowired
     private OrderItemService orderItemService;
 
+    @Autowired
+    private UserRecordClient userRecordClient;
+
     @Override
     public void addOrder(OrderEntity orderEntity) {
+        this.save(orderEntity);
+    }
+
+    @Override
+    public void addOrder(OrderParam orderParam) {
+        orderParam.setOrderNo(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss")));
+        // user record
+        UserRecordParam userRecordParam = new UserRecordParam();
+        userRecordParam.setUserId(1L);
+        userRecordParam.setRemark(orderParam.getOrderNo());
+        userRecordClient.add(userRecordParam);
+        // order
+        OrderEntity orderEntity = new OrderEntity();
+        BeanUtils.copyProperties(orderParam, orderEntity);
         this.save(orderEntity);
     }
 

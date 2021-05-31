@@ -11,16 +11,16 @@ public class CodeGenerationUtil {
 
     public static void main(String[] args) {
         DataSourceInfo info = new DataSourceInfo(
-                "jdbc:mysql://127.0.0.1:3306/ing_business?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false&serverTimezone=GMT%2B8",
+                "jdbc:mysql://127.0.0.1:3306/ing_user?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false&serverTimezone=GMT%2B8",
                 "root",
                 "123.com");
         CodeGenerationUtil.generationFull(
-                "com.yuge.ing.business",
+                "com.yuge.ing.user",
                 info,
                 true,
                 true,
-                "biz_",
-                "biz_order", "biz_order_item");
+                "",
+                "user_record");
     }
 
     /**

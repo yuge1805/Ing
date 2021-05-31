@@ -1,5 +1,6 @@
 package com.yuge.ing.business.server.service;
 
+import com.yuge.ing.business.common.param.OrderParam;
 import com.yuge.ing.business.server.po.OrderEntity;
 import com.yuge.cloud.mybatis.core.service.IService;
 import com.yuge.ing.business.server.po.OrderItemEntity;
@@ -23,6 +24,13 @@ public interface OrderService extends IService<OrderEntity> {
      * @param orderEntity
      */
     void addOrder(OrderEntity orderEntity);
+
+    /**
+     * 新增
+     *
+     * @param orderParam
+     */
+    void addOrder(OrderParam orderParam);
 
     /**
      * 新增
@@ -52,4 +60,5 @@ public interface OrderService extends IService<OrderEntity> {
      * @return
      */
     List<OrderEntity> queryByOrderNo(String orderNo);
+
 }
