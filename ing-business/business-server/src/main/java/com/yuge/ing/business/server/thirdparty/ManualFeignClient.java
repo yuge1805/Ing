@@ -12,18 +12,16 @@ import org.springframework.web.bind.annotation.RequestBody;
  * @author: yuge
  * @date: 2021-05-21
  **/
-@FeignClient(name = "thirdOther", contextId = "thirdOtherService", url = "http://127.0.0.1:18080", path = "/user", configuration = ThirdOtherConfiguration.class)
-public interface ThirdOtherService {
+//@FeignClient(name = "manualFeign", contextId = "manualFeignClient", url = "http://127.0.0.1:18080", path = "/user")
+public interface ManualFeignClient {
 
     @PostMapping("/userRecord/")
-    @Deprecated
     Response add(@RequestBody UserRecordParam userRecordParam);
 
     @PostMapping("/userRecord/")
     CommonResponse add2(@RequestBody UserRecordParam userRecordParam);
 
     @PostMapping("/userRecord/")
-    @Deprecated
     ResponseEntity<CommonResponse> add3(@RequestBody UserRecordParam userRecordParam);
 
 }

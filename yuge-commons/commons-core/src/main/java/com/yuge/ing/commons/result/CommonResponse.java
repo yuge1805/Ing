@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * @author: yuge
@@ -13,7 +14,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class CommonResponse<T> implements Serializable {
 
-    private static final String SUCCESS_CODE = "0";
+    private static final String SUCCESS_CODE = "000000";
 
     private static final String SUCCESS_MSG = "SUCCESS";
 
@@ -33,11 +34,19 @@ public class CommonResponse<T> implements Serializable {
         return new CommonResponse<>(SUCCESS_CODE, SUCCESS_MSG, data);
     }
 
-    public static <T> CommonResponse<T> error(CommonError commonError, String msg) {
+    public static <T> CommonResponse<T> error(String code, String msg) {
+        return new CommonResponse<>(code, msg, null);
+    }
+
+    public static <T> CommonResponse<T> error(CommonErrorEnum commonError, String msg) {
         return new CommonResponse<>(commonError.getCode(), msg, null);
     }
 
-    public static <T> CommonResponse<T> error(CommonError commonError) {
+    public static <T> CommonResponse<T> error(CommonErrorEnum commonError) {
         return new CommonResponse<>(commonError.getCode(), commonError.getMsg(), null);
+    }
+
+    public boolean isSuccess() {
+        return Objects.equals(code, SUCCESS_CODE);
     }
 }

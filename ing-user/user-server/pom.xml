@@ -37,12 +37,6 @@
             <!--<groupId>org.springframework.cloud</groupId>-->
             <!--<artifactId>spring-cloud-starter-netflix-hystrix</artifactId>-->
         <!--</dependency>-->
-
-        <dependency>
-            <groupId>com.yuge</groupId>
-            <artifactId>user-common</artifactId>
-            <version>${project.version}</version>
-        </dependency>
     
         <dependency>
             <groupId>org.projectlombok</groupId>

@@ -28,7 +28,7 @@ public class UserRecordController extends BaseController implements UserRecordAp
     @Autowired
     private UserRecordService userRecordService;
 
-    @PostMapping("/")
+    @PostMapping("/1")
     public CommonResponse add(@RequestBody UserRecordParam userRecordParam) {
         userRecordService.add(userRecordParam);
         return CommonResponse.success(true);

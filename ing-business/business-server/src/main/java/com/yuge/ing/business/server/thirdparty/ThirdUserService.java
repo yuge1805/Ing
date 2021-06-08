@@ -16,12 +16,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 public interface ThirdUserService {
 
     @PostMapping("/userRecord/")
+    @Deprecated
     Response add(@RequestBody UserRecordParam userRecordParam);
 
     @PostMapping("/userRecord/")
     CommonResponse add2(@RequestBody UserRecordParam userRecordParam);
 
     @PostMapping("/userRecord/")
+    @Deprecated
     ResponseEntity<CommonResponse> add3(@RequestBody UserRecordParam userRecordParam);
 
 }

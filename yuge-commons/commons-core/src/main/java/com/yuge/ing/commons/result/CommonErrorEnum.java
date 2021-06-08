@@ -6,16 +6,16 @@ import lombok.Getter;
  * @author: yuge
  * @date: 2021-05-18
  **/
-public enum CommonError {
+public enum CommonErrorEnum {
 
-    ERROR_SYSTEM("00000", "System error.");
+    ERROR_SYSTEM("99999", "System error.");
 
     @Getter
     private String code;
     @Getter
     private String msg;
 
-    CommonError(String code, String msg) {
+    CommonErrorEnum(String code, String msg) {
         this.code = code;
         this.msg = msg;
     }

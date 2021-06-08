@@ -15,7 +15,6 @@ mysql:
   password: 123.com
 
 
-
 logging:
   level:
     com.alibaba.nacos.client.naming: info
@@ -24,6 +23,8 @@ logging:
 
 feign:
   client:
+    # yml配置与@FeignClient#Configuration优先级
+    defaultToProperties: true
     config:
       # FeignClient#contextId
       thirdUserService:
@@ -33,7 +34,7 @@ feign:
         readTimeout: 20000
         # 需要配置logging.level.{接口全路径}: debug
         # 例：logging.level.com.yuge.ing.business.server.thirdparty.ThirdUserService: debug
-        loggerLevel: full
+        loggerLevel: basic
 #        errorDecoder: com.example.SimpleErrorDecoder
 #        retryer: com.example.SimpleRetryer
 #        requestInterceptors:
@@ -43,3 +44,7 @@ feign:
 #        encoder: com.example.SimpleEncoder
 #        decoder: com.example.SimpleDecoder
 #        contract: com.example.SimpleContract
+      thirdOtherService:
+        connectTimeout: 10000
+        readTimeout: 20000
+        loggerLevel: basic
