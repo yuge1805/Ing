@@ -48,7 +48,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, OrderEntity> impl
         UserRecordParam userRecordParam = new UserRecordParam();
         userRecordParam.setUserId(1L);
         userRecordParam.setRemark(orderParam.getOrderNo());
-        userRecordClient.add(userRecordParam);
+//        userRecordClient.add(userRecordParam);
         // order
         OrderEntity orderEntity = new OrderEntity();
         BeanUtils.copyProperties(orderParam, orderEntity);

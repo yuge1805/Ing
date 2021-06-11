@@ -19,9 +19,14 @@ logging:
   level:
     com.alibaba.nacos.client.naming: info
     com.yuge.ing.business.server.thirdparty.ThirdUserService: debug
+    com.yuge.ing.user.api.UserRecordClient: debug
+    com.netflix.loadbalancer.reactive.LoadBalancerCommand: debug
+#    com.netflix: debug
 
 
 feign:
+#  circuitbreak:
+#    enabled: true
   client:
     # yml配置与@FeignClient#Configuration优先级
     defaultToProperties: true
@@ -48,3 +53,39 @@ feign:
         connectTimeout: 10000
         readTimeout: 20000
         loggerLevel: basic
+      userRecord:
+        connectTimeout: 3000
+        readTimeout: 5000
+        loggerLevel: basic
+
+# ribbon retry生效，需要在pom中增加依赖spring-retry
+# RibbonAutoConfiguration#loadBalancedRetryPolicyFactory在检测到RetryTemplate类时加载；
+ribbon:
+  # 若配置feign超时，ribbon超时会被覆盖，以feign超时为主；
+  # 设置为每次请求超时，并非整体重试的超时时间；
+  ConnectTimeout: 10000
+  ReadTimeout: 60000
+  # Whether all operations can be retried for this client
+  # 需要重新思考服务器异常处理；（服务器异常包含哪些？ 500？ 服务端捕获异常后，按200返回？）
+  ##########################################################
+  #对所有操作请求都进行重试
+  #设置为true时，会对所有的请求进行重试，若为false只会对get请求进行重试；
+  #如果是put或post等写操作，
+  #如果服务器接口没做幂等性，会产生不好的结果，所以OkToRetryOnAllOperations慎用；
+  #默认情况下,GET方式请求无论是连接异常还是读取异常,都会进行重试
+  #非GET方式请求,只有连接异常时,才会进行重试；
+  #########################################################
+  OkToRetryOnAllOperations: false
+  # Max number of retries on the same server (excluding the first try)
+  # 默认值为 0
+  MaxAutoRetries: 1
+  # Max number of next servers to retry (excluding the first server)
+  # 默认值为 1
+  MaxAutoRetriesNextServer: 1
+  # 热加载
+  eager-load:
+    # 客户端服务名
+    clients: ing-user
+    enabled: true
+
+
