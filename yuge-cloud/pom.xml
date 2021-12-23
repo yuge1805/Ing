@@ -31,6 +31,7 @@
         <mybatis-plus-boot-starter.version>3.4.2</mybatis-plus-boot-starter.version>
         <lombok.version>1.18.16</lombok.version>
         <guava-retrying.version>2.0.0</guava-retrying.version>
+        <seata-spring-boot-starter.version>1.4.2</seata-spring-boot-starter.version>
     </properties>
 
     <dependencyManagement>
@@ -55,6 +56,12 @@
                 <version>${spring-cloud-alibaba.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+                <exclusions>
+                    <exclusion>
+                        <groupId>io.seata</groupId>
+                        <artifactId>seata-spring-boot-starter</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <dependency>
                 <groupId>com.taobao.arthas</groupId>
@@ -98,6 +105,12 @@
                 <groupId>com.github.rholder</groupId>
                 <artifactId>guava-retrying</artifactId>
                 <version>${guava-retrying.version}</version>
+            </dependency>
+            <!-- seata -->
+            <dependency>
+                <groupId>io.seata</groupId>
+                <artifactId>seata-spring-boot-starter</artifactId>
+                <version>${seata-spring-boot-starter.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

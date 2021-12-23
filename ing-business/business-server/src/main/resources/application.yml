@@ -12,7 +12,7 @@ mysql:
   port: 3306
   dbname: ing_business
   username: root
-  password: 123.com
+  password: root
 
 
 logging:
@@ -88,4 +88,97 @@ ribbon:
     clients: ing-user
     enabled: true
 
+#Seata
+seata:
+  enabled: true
+  application-id: applicationName
+  tx-service-group: ing_tx_group
+  enable-auto-data-source-proxy: true
+  data-source-proxy-mode: AT
+  use-jdk-proxy: false
+#  excludes-for-auto-proxying: firstClassNameForExclude,secondClassNameForExclude
+#  client:
+#    rm:
+#      async-commit-buffer-limit: 10000
+#      report-retry-count: 5
+#      table-meta-check-enable: false
+#      report-success-enable: false
+#      saga-branch-register-enable: false
+#      saga-json-parser: fastjson
+#      saga-retry-persist-mode-update: false
+#      saga-compensate-persist-mode-update: false
+#      lock:
+#        retry-interval: 10
+#        retry-times: 30
+#        retry-policy-branch-rollback-on-conflict: true
+#    tm:
+#      commit-retry-count: 5
+#      rollback-retry-count: 5
+#      default-global-transaction-timeout: 60000
+#      degrade-check: false
+#      degrade-check-period: 2000
+#      degrade-check-allow-times: 10
+#    undo:
+#      data-validation: true
+#      log-serialization: jackson
+#      log-table: undo_log
+#      only-care-update-columns: true
+#      compress:
+#        enable: true
+#        type: zip
+#        threshold: 64k
+#    load-balance:
+#      type: RandomLoadBalance
+#      virtual-nodes: 10
+  service:
+    # 事务群组；key为分组（例：my_test_tx_group），配置项值为TC集群名
+    vgroup-mapping:
+      ing_tx_group: default
+#    # TC服务列表；仅注册中心为file时使用
+#    grouplist:
+#      default: 127.0.0.1:8091
+#    enable-degrade: false
+#    # 全局事务开关；默认false。false为开启，true为关闭
+#    disable-global-transaction: false
+#  transport:
+#    shutdown:
+#      wait: 3
+#    thread-factory:
+#      boss-thread-prefix: NettyBoss
+#      worker-thread-prefix: NettyServerNIOWorker
+#      server-executor-thread-prefix: NettyServerBizHandler
+#      share-boss-worker: false
+#      client-selector-thread-prefix: NettyClientSelector
+#      client-selector-thread-size: 1
+#      client-worker-thread-prefix: NettyClientWorkerThread
+#      worker-thread-size: default
+#      boss-thread-size: 1
+#    type: TCP
+#    server: NIO
+#    heartbeat: true
+#    serialization: seata
+#    compressor: none
+#    enable-client-batch-send-request: true
+  config:
+    type: file
+    nacos:
+      namespace: ""
+      server-addr: 127.0.0.1:8848
+      group: SEATA_GROUP
+      username: ""
+      password: ""
+  registry:
+    type: nacos
+    nacos:
+      application: seata-server
+      server-addr: 127.0.0.1:8848
+      group : "SEATA_GROUP"
+#      namespace: ""
+#      username: ""
+#      password: ""
+#  log:
+#    exception-rate: 100
 
+# template db 配置
+db:
+  url: default
