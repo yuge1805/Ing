@@ -17,6 +17,7 @@
         <java.version>1.8</java.version>
         <web-spring-cloud-starter.version>0.0.1-SNAPSHOT</web-spring-cloud-starter.version>
         <mybatis-spring-cloud-starter.version>0.0.1-SNAPSHOT</mybatis-spring-cloud-starter.version>
+        <log-spring-cloud-starter.version>0.0.1-SNAPSHOT</log-spring-cloud-starter.version>
     </properties>
     <dependencies>
         <dependency>
@@ -32,6 +33,12 @@
         </dependency>
 
         <dependency>
+            <groupId>com.yuge.cloud</groupId>
+            <artifactId>log-spring-cloud-starter</artifactId>
+            <version>${log-spring-cloud-starter.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
@@ -41,6 +48,45 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.yuge.ing</groupId>
+            <artifactId>business-common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.yuge.ing</groupId>
+            <artifactId>user-api</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+        <!-- guava-retry -->
+        <dependency>
+            <groupId>com.github.rholder</groupId>
+            <artifactId>guava-retrying</artifactId>
+        </dependency>
+        <!-- spring retry -->
+        <dependency>
+            <groupId>org.springframework.retry</groupId>
+            <artifactId>spring-retry</artifactId>
+        </dependency>
+        <!-- seata -->
+        <dependency>
+            <groupId>io.seata</groupId>
+            <artifactId>seata-spring-boot-starter</artifactId>
+            <version>${seata-spring-boot-starter.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-seata</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>io.seata</groupId>
+                    <artifactId>seata-spring-boot-starter</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
     </dependencies>
 
     <build>

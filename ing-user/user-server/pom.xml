@@ -1,50 +1,51 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <parent>
-        <groupId>com.yuge</groupId>
-        <artifactId>ing-user</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
-    </parent>
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
+    <parent>
+        <groupId>com.yuge.cloud</groupId>
+        <artifactId>yuge-cloud</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <groupId>com.yuge.ing</groupId>
     <artifactId>user-server</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>user-server</name>
+    <description>User Server</description>
+
+    <properties>
+        <java.version>1.8</java.version>
+        <web-spring-cloud-starter.version>0.0.1-SNAPSHOT</web-spring-cloud-starter.version>
+        <mybatis-spring-cloud-starter.version>0.0.1-SNAPSHOT</mybatis-spring-cloud-starter.version>
+    </properties>
 
     <dependencies>
         <dependency>
-            <groupId>com.yuge</groupId>
-            <artifactId>user-common</artifactId>
-            <version>${project.version}</version>
+            <groupId>com.yuge.cloud</groupId>
+            <artifactId>web-spring-cloud-starter</artifactId>
+            <version>${web-spring-cloud-starter.version}</version>
         </dependency>
+
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
+            <groupId>com.yuge.cloud</groupId>
+            <artifactId>mybatis-spring-cloud-starter</artifactId>
+            <version>${mybatis-spring-cloud-starter.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
-        </dependency>
+
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.cloud</groupId>-->
+            <!--<artifactId>spring-cloud-starter-netflix-hystrix</artifactId>-->
+        <!--</dependency>-->
     
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <optional>true</optional>
         </dependency>
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
+
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
-        </dependency>
-        <!-- Spring Cloud Alibaba nacos -->
-        <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
         </dependency>
         <!-- Spring Cloud Alibaba sentinel -->
         <dependency>
@@ -77,6 +78,18 @@
                     <artifactId>junit-vintage-engine</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.yuge.cloud</groupId>
+            <artifactId>commons-core</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.yuge.ing</groupId>
+            <artifactId>user-common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 

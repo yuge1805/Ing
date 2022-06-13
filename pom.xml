@@ -15,9 +15,9 @@
     <description>Yuge Ing</description>
 
     <modules>
-        <module>ing-user</module>
-        <module>ing-commons</module>
-        <module>ing-generation</module>
+        <!--<module>ing-user</module>-->
+        <!--<module>ing-commons</module>-->
+        <!--<module>ing-generation</module>-->
     </modules>
 
 </project>

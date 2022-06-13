@@ -1,0 +1,7 @@
+# 第三方相关配置
+# 作为application-test.yml的补充模块
+third:
+  url: test-third-url
+  server-url: test-third-server-url
+  sub:
+    url: test-third-sub-url

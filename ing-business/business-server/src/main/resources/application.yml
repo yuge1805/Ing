@@ -4,12 +4,181 @@ spring:
 
 server:
   port: 9001
+  servlet:
+    context-path: /business
 
 mysql:
   host: 127.0.0.1
   port: 3306
   dbname: ing_business
   username: root
-  password: 123.com
+  password: root
 
 
+logging:
+  level:
+    com.alibaba.nacos.client.naming: info
+    com.yuge.ing.business.server.thirdparty.ThirdUserService: debug
+    com.yuge.ing.user.api.UserRecordClient: debug
+    com.netflix.loadbalancer.reactive.LoadBalancerCommand: debug
+#    com.netflix: debug
+
+
+feign:
+#  circuitbreak:
+#    enabled: true
+  client:
+    # yml配置与@FeignClient#Configuration优先级
+    defaultToProperties: true
+    config:
+      # FeignClient#contextId
+      thirdUserService:
+        # 单位为毫秒；connectTimeout 默认超时为10秒
+        connectTimeout: 10000
+        # 单位为毫秒；readTimeout 默认超时为60秒；
+        readTimeout: 20000
+        # 需要配置logging.level.{接口全路径}: debug
+        # 例：logging.level.com.yuge.ing.business.server.thirdparty.ThirdUserService: debug
+        loggerLevel: basic
+#        errorDecoder: com.example.SimpleErrorDecoder
+#        retryer: com.example.SimpleRetryer
+#        requestInterceptors:
+#          - com.example.FooRequestInterceptor
+#          - com.example.BarRequestInterceptor
+#        decode404: false
+#        encoder: com.example.SimpleEncoder
+#        decoder: com.example.SimpleDecoder
+#        contract: com.example.SimpleContract
+      thirdOtherService:
+        connectTimeout: 10000
+        readTimeout: 20000
+        loggerLevel: basic
+      userRecord:
+        connectTimeout: 3000
+        readTimeout: 5000
+        loggerLevel: basic
+
+# ribbon retry生效，需要在pom中增加依赖spring-retry
+# RibbonAutoConfiguration#loadBalancedRetryPolicyFactory在检测到RetryTemplate类时加载；
+ribbon:
+  # 若配置feign超时，ribbon超时会被覆盖，以feign超时为主；
+  # 设置为每次请求超时，并非整体重试的超时时间；
+  ConnectTimeout: 10000
+  ReadTimeout: 60000
+  # Whether all operations can be retried for this client
+  # 需要重新思考服务器异常处理；（服务器异常包含哪些？ 500？ 服务端捕获异常后，按200返回？）
+  ##########################################################
+  #对所有操作请求都进行重试
+  #设置为true时，会对所有的请求进行重试，若为false只会对get请求进行重试；
+  #如果是put或post等写操作，
+  #如果服务器接口没做幂等性，会产生不好的结果，所以OkToRetryOnAllOperations慎用；
+  #默认情况下,GET方式请求无论是连接异常还是读取异常,都会进行重试
+  #非GET方式请求,只有连接异常时,才会进行重试；
+  #########################################################
+  OkToRetryOnAllOperations: false
+  # Max number of retries on the same server (excluding the first try)
+  # 默认值为 0
+  MaxAutoRetries: 1
+  # Max number of next servers to retry (excluding the first server)
+  # 默认值为 1
+  MaxAutoRetriesNextServer: 1
+  # 热加载
+  eager-load:
+    # 客户端服务名
+    clients: ing-user
+    enabled: true
+
+#Seata
+seata:
+  enabled: true
+  application-id: applicationName
+  tx-service-group: ing_tx_group
+  enable-auto-data-source-proxy: true
+  data-source-proxy-mode: AT
+  use-jdk-proxy: false
+#  excludes-for-auto-proxying: firstClassNameForExclude,secondClassNameForExclude
+#  client:
+#    rm:
+#      async-commit-buffer-limit: 10000
+#      report-retry-count: 5
+#      table-meta-check-enable: false
+#      report-success-enable: false
+#      saga-branch-register-enable: false
+#      saga-json-parser: fastjson
+#      saga-retry-persist-mode-update: false
+#      saga-compensate-persist-mode-update: false
+#      lock:
+#        retry-interval: 10
+#        retry-times: 30
+#        retry-policy-branch-rollback-on-conflict: true
+#    tm:
+#      commit-retry-count: 5
+#      rollback-retry-count: 5
+#      default-global-transaction-timeout: 60000
+#      degrade-check: false
+#      degrade-check-period: 2000
+#      degrade-check-allow-times: 10
+#    undo:
+#      data-validation: true
+#      log-serialization: jackson
+#      log-table: undo_log
+#      only-care-update-columns: true
+#      compress:
+#        enable: true
+#        type: zip
+#        threshold: 64k
+#    load-balance:
+#      type: RandomLoadBalance
+#      virtual-nodes: 10
+  service:
+    # 事务群组；key为分组（例：my_test_tx_group），配置项值为TC集群名
+    vgroup-mapping:
+      ing_tx_group: default
+#    # TC服务列表；仅注册中心为file时使用
+#    grouplist:
+#      default: 127.0.0.1:8091
+#    enable-degrade: false
+#    # 全局事务开关；默认false。false为开启，true为关闭
+#    disable-global-transaction: false
+#  transport:
+#    shutdown:
+#      wait: 3
+#    thread-factory:
+#      boss-thread-prefix: NettyBoss
+#      worker-thread-prefix: NettyServerNIOWorker
+#      server-executor-thread-prefix: NettyServerBizHandler
+#      share-boss-worker: false
+#      client-selector-thread-prefix: NettyClientSelector
+#      client-selector-thread-size: 1
+#      client-worker-thread-prefix: NettyClientWorkerThread
+#      worker-thread-size: default
+#      boss-thread-size: 1
+#    type: TCP
+#    server: NIO
+#    heartbeat: true
+#    serialization: seata
+#    compressor: none
+#    enable-client-batch-send-request: true
+  config:
+    type: file
+    nacos:
+      namespace: ""
+      server-addr: 127.0.0.1:8848
+      group: SEATA_GROUP
+      username: ""
+      password: ""
+  registry:
+    type: nacos
+    nacos:
+      application: seata-server
+      server-addr: 127.0.0.1:8848
+      group : "SEATA_GROUP"
+#      namespace: ""
+#      username: ""
+#      password: ""
+#  log:
+#    exception-rate: 100
+
+# template db 配置
+db:
+  url: default

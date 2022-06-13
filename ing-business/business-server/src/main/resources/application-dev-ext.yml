@@ -1,0 +1,7 @@
+# 第三方相关配置
+# 作为application-dev.yml的补充模块
+third:
+  url: dev-third-url
+  server-url: dev-third-server-url
+  sub:
+    url: dev-third-sub-url

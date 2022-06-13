@@ -1,0 +1,11 @@
+# spring.profiles.include
+# 启用当前环境的其他配置文件；如：application-dev-ext.yml
+# 主要为了区分不同模块配置；
+# 在环境变量指定spring.profiles.include时，无法被覆盖；
+spring:
+  profiles:
+    include: dev-ext
+
+# db配置
+db:
+  url: dev

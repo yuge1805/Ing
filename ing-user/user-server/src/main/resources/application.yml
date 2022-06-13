@@ -40,7 +40,9 @@ server:
 management:
   server:
     # Actuator Web 访问端口
-    port: 28080
+    # 配置该端口时，可通过该端口访问actuator；例：http://ip:28080/actuator/beans
+    # 不配置时，通过server.port + context-path访问actuator；例：http://ip:18080/user/actuator/beans
+#    port: 28080
   endpoints:
     jmx:
       exposure:

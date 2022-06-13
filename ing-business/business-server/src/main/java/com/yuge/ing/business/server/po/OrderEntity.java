@@ -115,4 +115,10 @@ public class OrderEntity implements Serializable {
     private Integer deleted;
 
 
+    public OrderEntity() {
+    }
+
+    public OrderEntity(String orderNo) {
+        this.orderNo = orderNo;
+    }
 }

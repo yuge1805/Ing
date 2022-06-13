@@ -97,5 +97,10 @@ public class OrderItemEntity implements Serializable {
      */
     private Integer deleted;
 
+    public OrderItemEntity() {
+    }
 
+    public OrderItemEntity(String orderNo) {
+        this.orderNo = orderNo;
+    }
 }
